@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "vet")
@@ -22,6 +23,9 @@ public class Vet {
 
     @Column(name = "speciality")
     private String speciality;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy="vet")
+    private List<Consult> consult;
 
     public Vet() {
     }

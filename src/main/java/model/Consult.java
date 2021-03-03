@@ -28,8 +28,7 @@ public class Consult {
     public Consult() {
     }
 
-    public Consult(Long id, String date, String description, Vet veterinarian, Pet pet) {
-        this.id = id;
+    public Consult( String date, String description, Vet veterinarian, Pet pet) {
         this.date = date;
         this.description = description;
         this.veterinarian = veterinarian;

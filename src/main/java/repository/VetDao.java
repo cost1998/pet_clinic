@@ -63,10 +63,10 @@ public class VetDao {
         }
     }
 
-    public Vet getVet(Long id){
+    public Vet getVet(String lastName){
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
-            Vet vet = session.find(Vet.class, id);
+            Vet vet = session.find(Vet.class, lastName);
             return vet;
         } catch (Exception ex){
             ex.printStackTrace();

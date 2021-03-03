@@ -64,10 +64,10 @@ public class PetDao {
         }
     }
 
-    public Pet getPet(Long id){
+    public Pet getPet(String name){
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
-            Pet pet = session.find(Pet.class, id);
+            Pet pet = session.find(Pet.class,name );
             return pet;
         } catch (Exception ex){
             ex.printStackTrace();

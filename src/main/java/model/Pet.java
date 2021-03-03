@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="pet")
@@ -20,18 +21,21 @@ public class Pet {
     @Column(name = "birthdate")
     private String birthdate;
 
-    @Column(name = "owner_name")
-    private String ownerName;
+    @Column(name = "name")
+    private String name;
+
+    @OneToMany(mappedBy="pet")
+    private List<Consult> consult;
 
     public Pet() {
     }
 
-    public Pet(Long id, String race, boolean isVaccinated, String birthdate, String ownerName) {
+    public Pet(Long id, String race, boolean isVaccinated, String birthdate, String name) {
         this.id = id;
         this.race = race;
         this.isVaccinated = isVaccinated;
         this.birthdate = birthdate;
-        this.ownerName = ownerName;
+        this.name = name;
     }
 
     public Long getId() {
@@ -67,11 +71,11 @@ public class Pet {
     }
 
     public String getOwnerName() {
-        return ownerName;
+        return name;
     }
 
     public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+        this.name = name;
     }
 
     @Override
@@ -81,7 +85,7 @@ public class Pet {
                 ", race='" + race + '\'' +
                 ", isVaccinated=" + isVaccinated +
                 ", birthdate='" + birthdate + '\'' +
-                ", ownerName='" + ownerName + '\'' +
+                ", ownerName='" + name + '\'' +
                 '}';
     }
 }
