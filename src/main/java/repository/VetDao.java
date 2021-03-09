@@ -1,5 +1,6 @@
 package repository;
 
+import model.Pet;
 import model.Vet;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,8 +12,9 @@ import java.util.List;
 public class VetDao {
     public void createVet(Vet vet) {
         Transaction transaction = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the vetet object
@@ -24,13 +26,18 @@ public class VetDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
+            System.out.println("Something went wrong!");
+
+        } finally {
+            session.close();
         }
     }
 
-    public void updateVet(Vet vet){
+    public void updateVet(Vet vet) {
         Transaction transaction = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the vet object
@@ -42,13 +49,18 @@ public class VetDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
+            System.out.println("Something went wrong!");
+
+        } finally {
+            session.close();
         }
     }
 
-    public void deleteVet(Vet vet){
+    public void deleteVet(Vet vet) {
         Transaction transaction = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the vet object
@@ -60,31 +72,54 @@ public class VetDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
+            System.out.println("Something went wrong!");
+
+        } finally {
+            session.close();
         }
     }
 
-    public Vet getVet(String lastName){
+    public Vet getVet(Long id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Vet vet = session.find(Vet.class, lastName);
+            Vet vet = session.find(Vet.class, id);
             return vet;
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
+            System.out.println("Something went wrong!");
+
             return null;
+        } finally {
+            session.close();
         }
     }
 
     public List<Vet> getVets() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Query query = session.createQuery("from vet", Vet.class);
+            Query query = session.createQuery("from Vet", Vet.class);
 
             List<Vet> vets = query.list();
 
             return vets;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
+            System.out.println("Something went wrong!");
+
             return null;
+        } finally {
+            session.close();
+        }
+
+    }
+
+    public void printAllVets() {
+        List<Vet> vets = getVets();
+        for (Vet vet :
+                vets) {
+            System.out.println(vet.toString());
         }
     }
 }

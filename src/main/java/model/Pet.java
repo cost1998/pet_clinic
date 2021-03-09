@@ -15,23 +15,22 @@ public class Pet {
     @Column(name = "race")
     private String race;
 
-    @Column(name = "isVaccinated")
-    private boolean isVaccinated;
-
     @Column(name = "birthdate")
     private String birthdate;
+
+    @Column(name = "isVaccinated")
+    private boolean isVaccinated;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy="pet")
-    private List<Consult> consult;
+    @OneToMany(mappedBy = "pet")
+    private List<Consult> consults;
 
     public Pet() {
     }
 
-    public Pet(Long id, String race, boolean isVaccinated, String birthdate, String name) {
-        this.id = id;
+    public Pet(String race,boolean isVaccinated, String birthdate, String name) {
         this.race = race;
         this.isVaccinated = isVaccinated;
         this.birthdate = birthdate;
@@ -70,22 +69,29 @@ public class Pet {
         this.birthdate = birthdate;
     }
 
-    public String getOwnerName() {
+    public String getName() {
         return name;
     }
 
-    public void setOwnerName(String ownerName) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Consult> getConsults() {
+        return consults;
+    }
+
+    public void setConsultations(List<Consult> consults) {
+        this.consults = consults;
     }
 
     @Override
     public String toString() {
-        return "Pet{" +
-                "id=" + id +
-                ", race='" + race + '\'' +
-                ", isVaccinated=" + isVaccinated +
-                ", birthdate='" + birthdate + '\'' +
-                ", ownerName='" + name + '\'' +
-                '}';
+        return "Pet info :" +
+                "ID:" + id +
+                ", Name: " + name +
+                ", Race: " + race +
+                ", IsVaccinated=" + isVaccinated +
+                ", Birthdate: " + birthdate;
     }
 }

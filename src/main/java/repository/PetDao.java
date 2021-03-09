@@ -12,8 +12,9 @@ public class PetDao {
 
     public void createPet(Pet pet) {
         Transaction transaction = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the pet object
@@ -25,13 +26,17 @@ public class PetDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
+            System.out.println("Something went wrong!");
+        }finally {
+            session.close();
         }
     }
 
     public void updatePet(Pet pet){
         Transaction transaction = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the pet object
@@ -43,13 +48,17 @@ public class PetDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
+            System.out.println("Something went wrong!");
+        }finally {
+            session.close();
         }
     }
 
     public void deletePet(Pet pet){
         Transaction transaction = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
             // start a transaction
             transaction = session.beginTransaction();
             // save the pet object
@@ -61,31 +70,50 @@ public class PetDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
+            System.out.println("Something went wrong!");
+        }finally {
+            session.close();
         }
     }
 
-    public Pet getPet(String name){
+    public Pet getPet(Long id){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Pet pet = session.find(Pet.class,name );
+            Pet pet = session.get(Pet.class,id);
             return pet;
         } catch (Exception ex){
             ex.printStackTrace();
+            System.out.println("Something went wrong!");
             return null;
+        }finally {
+            session.close();
         }
     }
 
     public List<Pet> getPets() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Query query = session.createQuery("from pet", Pet.class);
+            Query query = session.createQuery("from Pet", Pet.class);
 
             List<Pet> pets = query.list();
 
             return pets;
         }catch (Exception ex){
             ex.printStackTrace();
+            System.out.println("Something went wrong!");
             return null;
+        }finally {
+            session.close();
+        }
+    }
+    
+    public void printAllPets(){
+        List<Pet> pets = getPets();
+        for (Pet pet:
+             pets) {
+            System.out.println(pet.toString());
         }
     }
 }

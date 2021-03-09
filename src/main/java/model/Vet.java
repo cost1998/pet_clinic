@@ -18,23 +18,23 @@ public class Vet {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "adress")
-    private String adress;
+    @Column(name = "address")
+    private String address;
 
     @Column(name = "speciality")
     private String speciality;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="vet")
-    private List<Consult> consult;
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "vet")
+    private List<Consult> consults;
 
     public Vet() {
     }
 
-    public Vet(Long id, String firstName, String lastName, String adress, String speciality) {
-        this.id = id;
+    public Vet(String firstName, String lastName, String address, String speciality) {
+
         this.firstName = firstName;
         this.lastName = lastName;
-        this.adress = adress;
+        this.address = address;
         this.speciality = speciality;
     }
 
@@ -63,11 +63,11 @@ public class Vet {
     }
 
     public String getAdress() {
-        return adress;
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAdress(String address) {
+        this.address = address;
     }
 
     public String getSpeciality() {
@@ -78,15 +78,22 @@ public class Vet {
         this.speciality = speciality;
     }
 
+    public List<Consult> getConsults() {
+        return consults;
+    }
+
+    public void setConsultations(List<Consult> consults) {
+        this.consults = consults;
+    }
+
     @Override
     public String toString() {
-        return "Vet{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", adress='" + adress + '\'' +
-                ", speciality='" + speciality + '\'' +
-                '}';
+        return "Vet info:" +
+                "ID: " + id +
+                ", FirstName: " + firstName +
+                ", LastName: " + lastName +
+                ", Address: " + address +
+                ", Speciality: " + speciality ;
     }
 }
 

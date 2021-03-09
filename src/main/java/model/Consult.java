@@ -18,20 +18,20 @@ public class Consult {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "vet_id")
-    private Vet veterinarian;
-
-    @ManyToOne
     @JoinColumn(name = "pet_id")
     private Pet pet;
+
+    @ManyToOne
+    @JoinColumn(name = "vet_id")
+    private Vet vet;
 
     public Consult() {
     }
 
-    public Consult( String date, String description, Vet veterinarian, Pet pet) {
+    public Consult( String date, String description, Vet vet, Pet pet) {
         this.date = date;
         this.description = description;
-        this.veterinarian = veterinarian;
+        this.vet = vet;
         this.pet = pet;
     }
 
@@ -59,12 +59,12 @@ public class Consult {
         this.description = description;
     }
 
-    public Vet getVeterinarian() {
-        return veterinarian;
+    public Vet getVet() {
+        return vet;
     }
 
-    public void setVeterinarian(Vet veterinarian) {
-        this.veterinarian = veterinarian;
+    public void setVet(Vet vet) {
+        this.vet = vet;
     }
 
     public Pet getPet() {
@@ -77,12 +77,11 @@ public class Consult {
 
     @Override
     public String toString() {
-        return "Consult{" +
-                "id=" + id +
-                ", date='" + date + '\'' +
-                ", description='" + description + '\'' +
-                ", veterinarian=" + veterinarian +
-                ", pet=" + pet +
-                '}';
+        return "Consult info: " +
+                "ID: " + id +
+                ", Date: " + date +
+                ", Description: " + description +"\n"
+                + vet + "\n"+
+                  pet ;
     }
 }
