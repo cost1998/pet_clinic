@@ -6,6 +6,7 @@ import model.Vet;
 import repository.ConsultDao;
 import repository.PetDao;
 import repository.VetDao;
+import utility.HibernateUtil;
 
 import java.util.Arrays;
 import java.util.Scanner;

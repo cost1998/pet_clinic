@@ -19,12 +19,12 @@ public class HibernateUtil {
             try {
                 Configuration configuration = new Configuration();
 
-                // Hibernate settings equivalent to hibernate.cfg.xml's properties
+                
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
-                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/pet_clinic?serverTimezone=UTC");
-                settings.put(Environment.USER, "root");
-                settings.put(Environment.PASS, "crazydog23");
+                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/{database_name}?serverTimezone=UTC");
+                settings.put(Environment.USER, {user});
+                settings.put(Environment.PASS, {pass});
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
